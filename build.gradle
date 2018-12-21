@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+}
+
+group 'cn.bning'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+[javadoc, compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+compileJava {
+    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+}
+
+repositories {
+    mavenLocal()
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+}
+
+dependencies {
+    compile "com.fasterxml.jackson.core:jackson-databind:2.9.7"
+    compile('commons-io:commons-io:2.6')
+    compile('org.apache.commons:commons-lang3:3.7')
+    compile('org.freemarker:freemarker:2.3.28')
+    compile('org.slf4j:slf4j-api:1.7.25')
+    // connector/J 8 requires JDK8 or higher, use 5.1.47 instead if you are using JDK1.7 or earlier
+    compile('mysql:mysql-connector-java:8.0.13')
+    compileOnly('org.projectlombok:lombok:1.18.4')
+    //runtime('org.apache.logging.log4j:log4j-api:2.11.1')
+    //runtime('org.apache.logging.log4j:log4j-core:2.11.1')
+    runtime('org.apache.logging.log4j:log4j-slf4j-impl:2.11.1')
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
